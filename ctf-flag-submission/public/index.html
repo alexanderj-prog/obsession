@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Flag Submission</title>
+    <meta name="robots" content="noindex" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <div class="brand"><span class="brand-mark" aria-hidden="true"></span>Flag Submission</div>
+        <span class="pill waiting" id="status-pill">Checking…</span>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section class="hero" aria-labelledby="page-title">
+        <h1 id="page-title">Submit your flags</h1>
+        <p class="sub">4 flags · 25 points each · teams of one or two</p>
+        <div class="clock idle" id="clock" role="timer" aria-live="off">--:--:--</div>
+        <div class="clock-label" id="clock-label">Waiting for admin to start</div>
+      </section>
+
+      <!-- AUTH -->
+      <section id="auth-section" class="card" aria-labelledby="auth-title">
+        <h2 id="auth-title">Team access</h2>
+        <div class="tabs" role="tablist" aria-label="Authentication">
+          <button class="tab" role="tab" id="tab-login" aria-selected="true" aria-controls="panel-login" type="button">
+            Sign in
+          </button>
+          <button
+            class="tab"
+            role="tab"
+            id="tab-register"
+            aria-selected="false"
+            aria-controls="panel-register"
+            type="button"
+          >
+            Register
+          </button>
+        </div>
+
+        <div class="alert error" id="auth-alert" hidden role="alert"></div>
+
+        <div class="panel" id="panel-login" role="tabpanel" aria-labelledby="tab-login">
+          <form id="login-form">
+            <div class="field">
+              <label for="login-team">Team name</label>
+              <input id="login-team" name="teamName" type="text" autocomplete="organization" required maxlength="32" />
+            </div>
+            <div class="field">
+              <label for="login-pass">Password</label>
+              <input id="login-pass" name="password" type="password" autocomplete="current-password" required />
+            </div>
+            <div class="field" id="login-member-field" hidden>
+              <label for="login-member">Which member are you?</label>
+              <select id="login-member" name="memberEmail" class="member-select"></select>
+            </div>
+            <button class="btn btn-primary btn-block" type="submit">Sign in</button>
+          </form>
+        </div>
+
+        <div class="panel" id="panel-register" role="tabpanel" aria-labelledby="tab-register" hidden>
+          <form id="register-form">
+            <div class="field">
+              <label for="reg-team">Team name</label>
+              <input id="reg-team" name="teamName" type="text" autocomplete="organization" required maxlength="32" />
+              <div class="hint">2–32 characters. Used to sign in.</div>
+            </div>
+            <div class="field">
+              <label for="reg-pass">Password</label>
+              <input
+                id="reg-pass"
+                name="password"
+                type="password"
+                autocomplete="new-password"
+                required
+                minlength="6"
+              />
+              <div class="hint">At least 6 characters.</div>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="reg-m1">Member 1 email</label>
+                <input
+                  id="reg-m1"
+                  name="member1"
+                  type="email"
+                  autocomplete="email"
+                  placeholder="name@course.christuniversity.in"
+                  required
+                />
+              </div>
+              <div class="field">
+                <label for="reg-m2">Member 2 email <span style="text-transform: none">(optional)</span></label>
+                <input
+                  id="reg-m2"
+                  name="member2"
+                  type="email"
+                  autocomplete="email"
+                  placeholder="name@course.christuniversity.in"
+                />
+              </div>
+            </div>
+            <div class="hint" style="margin-bottom: 1rem">
+              Must be a <strong>@&lt;coursename&gt;.christuniversity.in</strong> address. Solo players leave member 2
+              blank.
+            </div>
+            <button class="btn btn-primary btn-block" type="submit">Register team</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- DASHBOARD -->
+      <section id="dash-section" hidden aria-labelledby="dash-title">
+        <h2 id="dash-title" class="sr-only">Your team</h2>
+        <div class="team-bar">
+          <div class="team-meta">
+            <span class="team-name" id="team-name">—</span>
+            <span class="team-sub" id="team-sub">—</span>
+          </div>
+          <div style="display: flex; gap: 0.6rem; align-items: center">
+            <span class="score-chip zero" id="score-chip">0 / 100</span>
+            <button class="btn btn-ghost btn-sm" id="logout-btn" type="button">Sign out</button>
+          </div>
+        </div>
+
+        <div class="alert error" id="dash-alert" hidden role="alert"></div>
+        <div class="alert success" id="dash-success" hidden role="status"></div>
+
+        <div class="flags-grid" id="flags-grid">
+          <!-- flag cards injected by app.js -->
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>Wrong submissions have no penalty. Each flag can be submitted once per member.</p>
+        <p>Submissions close when the timer ends or the admin stops it.</p>
+      </div>
+    </footer>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

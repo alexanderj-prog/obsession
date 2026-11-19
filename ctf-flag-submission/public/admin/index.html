@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Control</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap-wide">
+        <div class="brand"><span class="brand-mark" aria-hidden="true"></span>Control</div>
+        <span class="pill waiting" id="status-pill">—</span>
+      </div>
+    </header>
+
+    <main class="wrap-wide">
+      <!-- GATE -->
+      <section id="gate" class="admin-gate card" aria-labelledby="gate-title">
+        <h2 id="gate-title">Admin access</h2>
+        <div class="alert error" id="gate-alert" hidden role="alert"></div>
+        <form id="gate-form">
+          <div class="field">
+            <label for="gate-pass">Password</label>
+            <input id="gate-pass" type="password" autocomplete="current-password" required />
+          </div>
+          <button class="btn btn-primary btn-block" type="submit">Unlock</button>
+        </form>
+      </section>
+
+      <!-- PANEL -->
+      <section id="panel" hidden>
+        <div class="card section-gap" style="margin-top: 1.5rem">
+          <div class="admin-status-row">
+            <div>
+              <div class="clock-label" style="margin: 0 0 0.4rem">Time remaining</div>
+              <div class="admin-clock idle" id="admin-clock">--:--:--</div>
+            </div>
+            <div class="admin-controls">
+              <button class="btn btn-primary" id="start-btn" type="button">Start 2-hour timer</button>
+              <button class="btn btn-danger" id="stop-btn" type="button" disabled>Stop now</button>
+              <button class="btn btn-ghost btn-sm" id="logout-btn" type="button">Lock</button>
+            </div>
+          </div>
+          <div class="alert error" id="panel-alert" hidden role="alert"></div>
+          <div class="alert success" id="panel-success" hidden role="status"></div>
+          <p class="board-meta" style="margin: 0">
+            <span>Status: <b id="meta-status">—</b></span>
+            <span>Started: <b id="meta-started">—</b></span>
+            <span>Ends: <b id="meta-ends">—</b></span>
+          </p>
+        </div>
+
+        <div class="section-gap">
+          <div class="board-meta">
+            <span>Teams: <b id="meta-teams">0</b></span>
+            <span>Submissions: <b id="meta-subs">0</b></span>
+            <span>Live · refreshed <b id="meta-refreshed">never</b></span>
+          </div>
+          <div class="table-scroll">
+            <table class="leaderboard">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Team</th>
+                  <th>Flags</th>
+                  <th>Score</th>
+                  <th>Last submit</th>
+                </tr>
+              </thead>
+              <tbody id="board-body">
+                <tr>
+                  <td colspan="5" style="color: var(--muted); text-align: center">Loading…</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap-wide"><p>Leaderboard is visible to admins only.</p></div>
+    </footer>
+
+    <script src="/admin.js"></script>
+  </body>
+</html>

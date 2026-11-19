@@ -1,0 +1,26 @@
+[build]
+  publish = "public"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/api/admin/login"
+  to = "/.netlify/functions/admin-login"
+  status = 200
+
+[[redirects]]
+  from = "/api/admin/timer"
+  to = "/.netlify/functions/admin-timer"
+  status = 200
+
+[[redirects]]
+  from = "/api/admin/leaderboard"
+  to = "/.netlify/functions/admin-leaderboard"
+  status = 200
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
